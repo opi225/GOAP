@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Mine Ore Action.
+ This action will have the actor approiach the rock that either contains copper or tin, mine the rock for 2 seconds, destroy the rock, and add 1 copper or tin to their inventory
+*/
+
 public class MineOre : ActionBase
 {
     public float mineTime = 0;
@@ -12,6 +16,10 @@ public class MineOre : ActionBase
         effect.Add(new KeyValuePair<string, object>("Has Ore", true));
     }
 
+    /*Checks the preconditions of this action
+    makes a list of all minable rocks in the scene, and then finds the closet one.
+    If the rock the actor was planning to mine disappears, it will move onto the next closest rock.
+    If there are no rocks left, it will return false, and the plan will be cancelled*/
     public override bool CheckPrecon(GameObject actor)
     {
         GameObject[] ore = UnityEngine.GameObject.FindGameObjectsWithTag("Mineable Rock");
@@ -36,11 +44,11 @@ public class MineOre : ActionBase
         {
             return false;
         }
-        Debug.Log("rocks found!");
         target = closest;
         return true;
     }
 
+    /**/ 
     public override bool DoAction(GameObject actor)
     {
         if (mineTime >= 2)

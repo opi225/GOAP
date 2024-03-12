@@ -7,6 +7,7 @@ TagManager:
   - Prospect Rock
   - Chest
   - Mineable Rock
+  - Anvil
   layers:
   - Default
   - TransparentFX

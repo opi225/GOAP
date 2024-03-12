@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Planner Class
+ The Brain of the entire AI system.
+This object will take in a list of actions, that a given actor has, as well as their goals and the world state, and create a plan that will be the lowest cost based on the */
+
 public class Planner : MonoBehaviour
 {
     public Queue<ActionBase> createPlan(GameObject actor, List<ActionBase> totalActions, HashSet<KeyValuePair<string, object>> goal, HashSet<KeyValuePair<string, object>> introStates)
@@ -44,18 +48,10 @@ public class Planner : MonoBehaviour
             }
             bestPath = bestPath.parentNode;
         }
-        if(finalPath.Count != 0)
-        {
-            Debug.Log("Final Path is Here!");
-        }
 
         foreach(ActionBase act in finalPath)
         {
             finalQueue.Enqueue(act);
-        }
-        if (finalQueue.Count != 0)
-        {
-            Debug.Log("Final Queue is Here!");
         }
 
         return finalQueue;
@@ -83,7 +79,6 @@ public class Planner : MonoBehaviour
             {
                 if(b.Equals(c))
                 {
-                    Debug.Log("Equal!");
                     check = true;
                     break;
                 }

@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*Prospect Rock action.
+This will have the actor approach a rock that is generic and replace it with a rock that is either a copper or a tin rock.
+*/
+
 public class ProspectRock : ActionBase
 {
     public GameObject copperRock;
@@ -15,6 +19,10 @@ public class ProspectRock : ActionBase
         cost = 1f;
     }
 
+    /*Checks the preconditions of this action
+     makes a list of all unprospected rocks in the scene, and then finds the closet one.
+    If the rock the actor was planning to prospect disappears, it will move onto the next closest rock.
+    If there are no rocks left, it will return false, and the plan will be cancelled*/
     public override bool CheckPrecon(GameObject actor)
     {
         GameObject[] rocks = UnityEngine.GameObject.FindGameObjectsWithTag("Prospect Rock");
@@ -45,6 +53,7 @@ public class ProspectRock : ActionBase
         return true;
     }
 
+    //Causes the effect of this action. When a rock gets prospected, it replaces the original rock with a new rock that can be mined for ore.
     public override bool DoAction(GameObject actor)
     {
         GameObject newRock;
